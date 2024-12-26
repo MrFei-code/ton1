@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cssl.cpf.mapper.DeptMapper">
+
+    <resultMap id="BaseResultMap" type="com.cssl.cpf.domain.Dept">
+            <id property="deptno" column="deptno" jdbcType="INTEGER"/>
+            <result property="dname" column="dname" jdbcType="VARCHAR"/>
+            <result property="loc" column="loc" jdbcType="VARCHAR"/>
+    </resultMap>
+    <resultMap id="deptMap" type="Dept">
+        <id property="deptno" column="deptno" javaType="String" />
+        <collection property="emps" ofType="Emp"/>
+    </resultMap>
+    <select id="selectDept" resultMap="deptMap">
+        select * from emp e right join dept d
+                                       on e.deptno=d.deptno
+    </select>
+    <sql id="Base_Column_List">
+        deptno,dname,loc
+    </sql>
+</mapper>

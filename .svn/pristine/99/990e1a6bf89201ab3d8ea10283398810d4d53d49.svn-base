@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.cssl.cpf.mapper.EmpMapper">
+
+    <resultMap id="BaseResultMap" type="com.cssl.cpf.domain.Emp">
+            <id property="empno" column="empno" jdbcType="INTEGER"/>
+            <result property="ename" column="ename" jdbcType="VARCHAR"/>
+            <result property="hiredate" column="hiredate" jdbcType="DATE"/>
+            <result property="sal" column="sal" jdbcType="DECIMAL"/>
+            <result property="deptno" column="deptno" jdbcType="INTEGER"/>
+    </resultMap>
+    <resultMap id="empMap" type="Emp">
+        <id property="empno" column="empno" javaType="String" />
+        <association property="dept"/>
+    </resultMap>
+
+    <select id="selectEmp" resultMap="empMap">
+        select * from emp e left join dept d
+                                      on e.deptno=d.deptno
+    </select>
+
+    <sql id="Base_Column_List">
+        empno,ename,hiredate,
+        sal,deptno
+    </sql>
+</mapper>

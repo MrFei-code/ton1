@@ -1,0 +1,44 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql:///aa?serverTimezone=GMT
+    username: root
+    password: 051130cpf
+  data:
+    mongodb:
+      uri: mongodb://tcpf:t123@localhost:27017/test
+    redis:
+      #password: 123456        #集群也要配置redis密码
+      database: 0
+      timeout: 3000           # 读超时
+      connectTimeout: 5000    # 连接超时
+      lettuce: #lettuce
+        pool:
+          min-idle: 5
+          max-idle: 10
+          max-active: 100
+          max-wait: 2000
+#      cluster:
+#        nodes:
+#          - 192.168.174.167:6001
+#          - 192.168.174.167:6002
+#          - 192.168.174.167:6003
+#          - 192.168.174.167:6004
+#          - 192.168.174.167:6005
+#          - 192.168.174.167:6006
+
+mybatis-plus:
+  mapper-locations: classpath:/mapper/**
+  type-aliases-package: com.cssl.cpf.domain
+  configuration:
+    auto-mapping-behavior: full
+    use-generated-keys: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: false   #默认true开启驼峰命名，配错对象为空
+  global-config:
+    db-config:
+      id-type: auto			  #主键自增
+      logic-delete-field: isDelete
+      logic-delete-value: 1
+      logic-not-delete-value: 0
+
